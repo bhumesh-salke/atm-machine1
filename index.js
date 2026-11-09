@@ -9,6 +9,8 @@
 // ============================================================
 
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
 // ------------------------------------------------------------
 //  STEP 1 : DATABASE - Asli me ye MySQL me hota hai
@@ -32,11 +34,38 @@ let DB = {
 // ------------------------------------------------------------
 //  STEP 2 : Server banana
 // ------------------------------------------------------------
+
+}
 const server = http.createServer((req, res) => {
+  if (req.url === '/icon-192.png' || req.url === '/icon-512.png') {
+      const iconPath = path.join(__dirname, 'public', req.url);
+        fs.readFile(iconPath, (err, data) => {
+            if (err) { res.writeHead(404); res.end(); return; }
+                res.writeHead(200, { 'Content-Type': 'image/png' });
+                    res.end(data);
+                      });
+                        return;
+                        }
+  }
+  if (req.url === '/manifest.json' || req.url === '/icon-192.png' || req.url === '/icon-512.png') {
+  
+    }
+      const filePath = path.join(__dirname, 'public', req.url);
+        const ext = req.url.endsWith('.png') ? 'image/png' : 'application/json';
+          fs.readFile(filePath, (err, data) => {
+              if (err) { res.writeHead(404); res.end(); return; }
+                  res.writeHead(200, { 'Content-Type': ext });
+                      res.end(data);
+                        });
+                          return;
+                          }
+  }
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(`
 <!DOCTYPE html>
 <html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ATM Machine - Mera Bank</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#000000">
 <style>
 *{box-sizing:border-box;font-family:'Segoe UI',system-ui}body{margin:0;background:#0B1020;color:white;min-height:100vh}
 .box{max-width:460px;margin:auto;padding:16px}
