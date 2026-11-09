@@ -36,7 +36,7 @@ let DB = {
 //  STEP 2 : Server banana
 // ------------------------------------------------------------
 
-}
+
 const server = http.createServer((req, res) => {
   if (req.url === '/icon-192.png' || req.url === '/icon-512.png') {
       const iconPath = path.join(__dirname, 'public', req.url);
