@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
                     res.end(data);
                       });
                         return;
-                        }
+                        
   
   if (req.url === '/manifest.json' || req.url === '/icon-192.png' || req.url === '/icon-512.png') {
   
