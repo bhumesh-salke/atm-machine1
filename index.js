@@ -49,8 +49,6 @@ const server = http.createServer((req, res) => {
                         
   
   if (req.url === '/manifest.json' || req.url === '/icon-192.png' || req.url === '/icon-512.png') {
-  
-    }
       const filePath = path.join(__dirname, 'public', req.url);
         const ext = req.url.endsWith('.png') ? 'image/png' : 'application/json';
           fs.readFile(filePath, (err, data) => {
@@ -60,7 +58,6 @@ const server = http.createServer((req, res) => {
                         });
                           return;
                           }
-  }
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(`
 <!DOCTYPE html>
